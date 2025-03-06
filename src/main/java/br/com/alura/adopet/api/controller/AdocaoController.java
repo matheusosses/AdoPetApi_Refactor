@@ -2,15 +2,11 @@ package br.com.alura.adopet.api.controller;
 
 import br.com.alura.adopet.api.exception.ValidacaoException;
 import br.com.alura.adopet.api.model.Adocao;
-import br.com.alura.adopet.api.model.StatusAdocao;
 import br.com.alura.adopet.api.service.AdocaoService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/adocoes")
