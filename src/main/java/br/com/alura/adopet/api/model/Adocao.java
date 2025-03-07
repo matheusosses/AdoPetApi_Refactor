@@ -3,6 +3,7 @@ package br.com.alura.adopet.api.model;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -10,8 +11,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "adocoes")
 @Getter
-@Setter
 @EqualsAndHashCode(of = "id")
+@NoArgsConstructor
 public class Adocao {
 
     @Id
@@ -32,4 +33,21 @@ public class Adocao {
     private StatusAdocao status;
 
     private String justificativaStatus;
+
+    public Adocao(Tutor tutor, Pet pet, String motivo) {
+        this.tutor = tutor;
+        this.pet = pet;
+        this.motivo = motivo;
+        this.status = StatusAdocao.AGUARDANDO_AVALIACAO;
+        this.data = LocalDateTime.now();
+    }
+
+    public void reprovar(String justificativa) {
+        this.status = StatusAdocao.AGUARDANDO_AVALIACAO;
+        this.justificativaStatus = justificativa;
+    }
+
+    public void aprovar() {
+        this.status = StatusAdocao.APROVADO;
+    }
 }

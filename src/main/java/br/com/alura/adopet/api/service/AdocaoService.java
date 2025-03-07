@@ -13,7 +13,6 @@ import br.com.alura.adopet.api.repository.TutorRepository;
 import br.com.alura.adopet.api.validacoes.IValidador;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -42,12 +41,7 @@ public class AdocaoService {
 
         validacoes.forEach(v -> v.validar(dto));
 
-        Adocao adocao = new Adocao();
-        adocao.setData(LocalDateTime.now());
-        adocao.setStatus(StatusAdocao.AGUARDANDO_AVALIACAO);
-        adocao.setTutor(tutor);
-        adocao.setPet(pet);
-        adocao.setMotivo(dto.motivo());
+        Adocao adocao = new Adocao(tutor, pet, dto.motivo());
         repository.save(adocao);
 
         emailService.enviarEmail(adocao.getPet().getAbrigo().getEmail(),
@@ -60,8 +54,7 @@ public class AdocaoService {
 
     public void reprovar(ReprovacaoAdocaoDTO dto) {
         Adocao adocao = repository.getReferenceById(dto.idAdocao());
-        adocao.setStatus(StatusAdocao.REPROVADO);
-        adocao.setJustificativaStatus(dto.justificativa());
+        adocao.reprovar(dto.justificativa());
 
         emailService.enviarEmail(adocao.getTutor().getEmail(),
                 "Adoção reprovada",
@@ -76,7 +69,7 @@ public class AdocaoService {
     public void aprovar(AprovacaoAdocaoDTO dto) {
         Adocao adocao = repository.getReferenceById(dto.idAdocao());
 
-        adocao.setStatus(StatusAdocao.APROVADO);
+        adocao.aprovar();
 
         emailService.enviarEmail(adocao.getTutor().getEmail(),
                 "Adoção aprovada",
