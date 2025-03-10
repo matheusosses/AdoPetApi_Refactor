@@ -1,10 +1,9 @@
 package br.com.alura.adopet.api.controller;
 
-import br.com.alura.adopet.api.dto.AprovacaoAdocaoDTO;
-import br.com.alura.adopet.api.dto.ReprovacaoAdocaoDTO;
-import br.com.alura.adopet.api.dto.SolicitacaoAdocaoDTO;
+import br.com.alura.adopet.api.dto.adocao.AprovacaoAdocaoDTO;
+import br.com.alura.adopet.api.dto.adocao.ReprovacaoAdocaoDTO;
+import br.com.alura.adopet.api.dto.adocao.SolicitacaoAdocaoDTO;
 import br.com.alura.adopet.api.exception.ValidacaoException;
-import br.com.alura.adopet.api.model.Adocao;
 import br.com.alura.adopet.api.service.AdocaoService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
