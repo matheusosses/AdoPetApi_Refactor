@@ -49,4 +49,9 @@ public class Pet {
     @OneToOne(mappedBy = "pet")
     @JsonBackReference("adocao_pets")
     private Adocao adocao;
+
+    public void atualizar(Abrigo abrigo) {
+        this.abrigo = abrigo;
+        this.adotado = false;
+    }
 }
