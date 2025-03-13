@@ -41,12 +41,12 @@ public class AbrigoService {
             Long id = Long.parseLong(idOuNome);
             return abrigoRepository.getReferenceById(id).getPets();
         } catch (EntityNotFoundException enfe) {
-            throw new ValidacaoException("Informaçao não encontrada");
+            throw new ValidacaoException("Id não encontrado");
         } catch (NumberFormatException e) {
             try {
                 return abrigoRepository.findByNome(idOuNome).getPets();
             } catch (EntityNotFoundException enfe) {
-                throw new ValidacaoException("Informaçao não encontrada");
+                throw new ValidacaoException("Nome não encontrado");
             }
         }
     }
@@ -57,13 +57,13 @@ public class AbrigoService {
             Abrigo abrigo = abrigoRepository.getReferenceById(id);
             atualizarInformacoes(pet, abrigo);
         } catch (EntityNotFoundException enfe) {
-            throw new ValidacaoException("Informaçao não encontrada");
+            throw new ValidacaoException("Id não encontrado");
         } catch (NumberFormatException nfe) {
             try {
                 Abrigo abrigo = abrigoRepository.findByNome(idOuNome);
                 atualizarInformacoes(pet, abrigo);
             } catch (EntityNotFoundException enfe) {
-                throw new ValidacaoException("Informaçao não encontrada");
+                throw new ValidacaoException("Nome não encontrado");
             }
         }
     }
